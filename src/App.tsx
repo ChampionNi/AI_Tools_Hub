@@ -53,19 +53,23 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <main className="py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Popular Categories</h2>
+      <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Left Sidebar */}
+        <aside className="w-64 flex-shrink-0 hidden md:block">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Categories</h2>
           <CategoryList />
-          
-          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-6">Featured AI Tools</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 md:ml-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured AI Tools</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {tools.map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
       
       <footer className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -11,28 +11,31 @@ import {
 } from 'lucide-react';
 
 const categories = [
-  { name: 'General AI', icon: Brain },
-  { name: 'Image Generation', icon: Image },
-  { name: 'Chat & Writing', icon: MessageSquare },
-  { name: 'Code & Development', icon: Code },
-  { name: 'Music Generation', icon: Music },
-  { name: 'Video Creation', icon: Video },
-  { name: 'Design Tools', icon: PenTool },
-  { name: 'Education', icon: BookOpen },
+  { name: 'General AI', icon: Brain, count: 156 },
+  { name: 'Image Generation', icon: Image, count: 89 },
+  { name: 'Chat & Writing', icon: MessageSquare, count: 124 },
+  { name: 'Code & Development', icon: Code, count: 67 },
+  { name: 'Music Generation', icon: Music, count: 45 },
+  { name: 'Video Creation', icon: Video, count: 78 },
+  { name: 'Design Tools', icon: PenTool, count: 92 },
+  { name: 'Education', icon: BookOpen, count: 103 },
 ];
 
 export default function CategoryList() {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
+    <div className="space-y-2">
       {categories.map((category) => {
         const Icon = category.icon;
         return (
           <div
             key={category.name}
-            className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-gray-100"
+            className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors group"
           >
-            <Icon className="h-6 w-6 text-blue-500 mr-3" />
-            <span className="text-gray-700 font-medium">{category.name}</span>
+            <div className="flex items-center">
+              <Icon className="h-5 w-5 text-blue-500 group-hover:text-blue-600 mr-3" />
+              <span className="text-gray-700 group-hover:text-gray-900">{category.name}</span>
+            </div>
+            <span className="text-sm text-gray-500 group-hover:text-gray-700">{category.count}</span>
           </div>
         );
       })}
