@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';  // Add this import
+
 import { 
   Brain, 
   Image, 
@@ -21,7 +23,24 @@ const categories = [
   { name: 'Education', icon: BookOpen, count: 103 },
 ];
 
-export default function CategoryList() {
+interface CategoryListProps {
+  onCategorySelect: (category: string) => void;
+}
+
+export default function CategoryList({ onCategorySelect }: CategoryListProps) {
+  const navigate = useNavigate();
+  
+  const handleCategoryClick = (categoryName: string) => {
+    // Prevent default event behavior
+    try {
+      onCategorySelect(categoryName);
+      const formattedPath = categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      navigate(`/category/${formattedPath}`);
+    } catch (error) {
+      console.error('Navigation error:', error);
+    }
+  };
+
   return (
     <div className="space-y-2">
       {categories.map((category) => {
@@ -29,6 +48,7 @@ export default function CategoryList() {
         return (
           <div
             key={category.name}
+            onClick={() => handleCategoryClick(category.name)}
             className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors group"
           >
             <div className="flex items-center">
