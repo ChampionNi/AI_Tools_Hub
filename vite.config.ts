@@ -7,4 +7,11 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    watch: {
+      usePolling: true  // 添加这个可以强制启用轮询
+    },
+  }
 });
+
+
