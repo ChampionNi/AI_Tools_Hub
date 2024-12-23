@@ -13,14 +13,54 @@ import {
 } from 'lucide-react';
 
 const categories = [
-  { name: 'General AI', icon: Brain, count: 156 },
-  { name: 'Image Generation', icon: Image, count: 89 },
-  { name: 'Chat & Writing', icon: MessageSquare, count: 124 },
-  { name: 'Code & Development', icon: Code, count: 67 },
-  { name: 'Music Generation', icon: Music, count: 45 },
-  { name: 'Video Creation', icon: Video, count: 78 },
-  { name: 'Design Tools', icon: PenTool, count: 92 },
-  { name: 'Education', icon: BookOpen, count: 103 },
+  { 
+    name: 'General AI', 
+    icon: Brain, 
+    count: 156,
+    link: 'https://chat.openai.com' // Example link for ChatGPT
+  },
+  { 
+    name: 'Image Generation', 
+    icon: Image, 
+    count: 89,
+    link: 'https://www.midjourney.com' // Example link for Midjourney
+  },
+  { 
+    name: 'Chat & Writing', 
+    icon: MessageSquare, 
+    count: 124,
+    link: 'https://claude.ai' // Example link for Claude
+  },
+  { 
+    name: 'Code & Development', 
+    icon: Code, 
+    count: 67,
+    link: 'https://github.com/features/copilot' // Example link for GitHub Copilot
+  },
+  { 
+    name: 'Music Generation', 
+    icon: Music, 
+    count: 45,
+    link: 'https://www.soundraw.io' // Example link for Soundraw
+  },
+  { 
+    name: 'Video Creation', 
+    icon: Video, 
+    count: 78,
+    link: 'https://runwayml.com' // Example link for Runway
+  },
+  { 
+    name: 'Design Tools', 
+    icon: PenTool, 
+    count: 92,
+    link: 'https://www.figma.com' // Example link for Figma
+  },
+  { 
+    name: 'Education', 
+    icon: BookOpen, 
+    count: 103,
+    link: 'https://www.duolingo.com' // Example link for Duolingo
+  },
 ];
 
 interface CategoryListProps {
@@ -31,8 +71,11 @@ export default function CategoryList({ onCategorySelect }: CategoryListProps) {
   const navigate = useNavigate();
   
   const handleCategoryClick = (categoryName: string) => {
-    // Prevent default event behavior
     try {
+      const category = categories.find(cat => cat.name === categoryName);
+      if (category?.link) {
+        window.open(category.link, '_blank'); // Open link in new tab
+      }
       onCategorySelect(categoryName);
       const formattedPath = categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       navigate(`/category/${formattedPath}`);
