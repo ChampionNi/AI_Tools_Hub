@@ -20,7 +20,8 @@ const mockTools = {
     { id: '3', name: 'DALL-E', description: 'AI image generation by OpenAI', imageUrl: 'https://images.unsplash.com/photo-1686191128892-3e67f2243a28?auto=format&fit=crop&q=80&w=800', category: 'image-generation', url: 'https://dall-e.com' },
     { id: '4', name: 'Midjourney', description: 'Create artistic images with AI', imageUrl: 'https://images.unsplash.com/photo-1684163761883-8d461ca0a756?auto=format&fit=crop&q=80&w=800', category: 'image-generation', url: 'https://midjourney.com' },
   ],
-  // Add more categories as needed
+  'chat-writing': [],
+  'code-development': []
 };
 
 export default function CategoryPage() {
@@ -46,18 +47,16 @@ export default function CategoryPage() {
     fetchToolsByCategory();
   }, [categoryId]);
 
-  if (loading) {
-    return <div className="flex justify-center p-8">Loading...</div>;
-  }
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <section className="w-full flex-grow">
-        <div className="container mx-auto px-4 py-8">
-          <h2 className="text-3xl font-bold mb-6 capitalize">
-            {categoryId?.replace(/-/g, ' ')}
-          </h2>
-          
+    <div className="h-full">
+      <section>
+        <h2 className="text-3xl font-bold mb-6 capitalize">
+          {categoryId?.replace(/-/g, ' ')}
+        </h2>
+        
+        {loading ? (
+          <div className="flex justify-center p-8">Loading...</div>
+        ) : tools.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tools.map((tool) => (
               <a 
@@ -77,20 +76,12 @@ export default function CategoryPage() {
               </a>
             ))}
           </div>
-
-          {tools.length === 0 && (
-            <div className="text-center text-gray-500 py-8">
-              No tools found in this category
-            </div>
-          )}
-        </div>
+        ) : (
+          <div className="flex items-center justify-center min-h-[400px] text-gray-500">
+            No tools found in this category
+          </div>
+        )}
       </section>
-      
-      {/* <footer className="w-full bg-gray-100 py-4 mt-auto">
-        <div className="container mx-auto px-4 text-center text-gray-600 text-sm">
-          © {new Date().getFullYear()} AI Tools Hub. All rights reserved.
-        </div>
-      </footer> */}
     </div>
   );
 } 

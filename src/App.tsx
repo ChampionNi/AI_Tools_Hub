@@ -41,18 +41,18 @@ function CategoryList() {
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50">
+      <div className="flex flex-col min-h-screen bg-gray-50">
         <Header />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 mb-24 relative">
+          <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-8">
             {/* Categories Sidebar - Always visible */}
-            <aside className="w-full md:w-64 flex-shrink-0">
+            <aside className="md:sticky md:top-8 h-fit">
               <h2 className="text-xl font-bold mb-4">Categories</h2>
               <CategoryList />
             </aside>
 
             {/* Main Content Area */}
-            <main className="flex-1">
+            <main>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/category/:categoryId" element={<CategoryPage />} />
@@ -60,7 +60,7 @@ function App() {
             </main>
           </div>
         </div>
-        <footer className="bg-white border-t border-gray-200 mt-16">
+        <footer className="bg-white border-t border-gray-200 fixed bottom-0 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <p className="text-center text-gray-500">© 2024 AI Tools Hub. All rights reserved.</p>
           </div>
